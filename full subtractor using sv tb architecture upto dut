@@ -1,0 +1,81 @@
+//full subtractor
+// Code your design here
+module fs(a,b,c,d,bo);
+  input a,b,c;
+  output d,bo;
+  assign d=a^b^c;
+  assign bo=(b&c)|((~a)&b)|((~a)&c);
+endmodule
+interface inter;
+  logic a;
+  logic b;
+  logic c;
+  logic d;
+  logic bo;
+endinterface
+// Code your testbench here
+// or browse Examples
+class generator;
+  logic a;
+  logic b;
+  logic c;
+  mailbox mbx;
+  task run();
+    for (int i=0;i<8;i++)
+      begin
+        {a,b,c}=i;mbx.put({a,b,c});#10;
+      end
+  endtask
+endclass
+class driver;
+  virtual inter vif;
+  mailbox mbx;
+  logic [2:0]data;
+  logic a,b,c;
+  task run();
+    repeat (8) begin
+      mbx.get(data);
+      a=data[2];
+      b=data[1];
+      c=data[0];
+      vif.a=a;
+      vif.b=b;
+      vif.c=c;
+      
+    end
+  endtask
+endclass
+module tb;
+  inter inf();
+  generator gen;
+  driver div;
+  mailbox mbx;
+  fs u1(.a(inf.a),.b(inf.b),.c(inf.c),.d(inf.d),.bo(inf.bo));
+  
+  initial
+    begin
+      $monitor("a=%0b b=%0b c=%0b d=%0b bo=%0b",inf.a,inf.b,inf.c,inf.d,inf.bo);
+      gen=new();
+      div=new();
+      mbx=new();
+      div.vif=inf;
+      gen.mbx=mbx;
+      div.mbx=mbx;
+       
+      fork
+        gen.run();
+        div.run();
+      join
+     
+    end
+endmodule
+//output
+a=0 b=0 c=0 d=0 bo=0
+a=0 b=0 c=1 d=1 bo=1
+a=0 b=1 c=0 d=1 bo=1
+a=0 b=1 c=1 d=0 bo=1
+a=1 b=0 c=0 d=1 bo=0
+a=1 b=0 c=1 d=0 bo=0
+a=1 b=1 c=0 d=0 bo=0
+a=1 b=1 c=1 d=1 bo=1
+    
