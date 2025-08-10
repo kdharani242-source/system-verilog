@@ -1,0 +1,69 @@
+// Code your design here
+module hs(a,b,d,c);
+  input a,b;
+  output d,c;
+  assign d=a^b;
+  assign c=((~a)&b);
+endmodule
+interface inter;
+  logic a;
+  logic b;
+  logic d;
+  logic c;
+endinterface
+// Code your testbench here
+// or browse Examples
+class generator;
+  logic a;
+  logic b;
+  mailbox mbx;
+  task run();
+    for(integer i=0;i<4;i++) 
+      begin
+        {a,b}=i; mbx.put({a,b});#10;
+      end
+  endtask
+endclass
+class driver;
+  virtual inter vif;
+  logic [1:0]data;
+  logic a,b;
+  mailbox mbx;
+  task run();
+    repeat (4) begin
+      mbx.get(data);
+      a=data[1];
+      b=data[0];
+      vif.a=a;
+      vif.b=b;
+      #10;
+      $display("a=%ob b=%0b d=%0b c=%0b",a,b,vif.d,vif.c);
+      
+    end
+  endtask
+endclass
+module tb;
+  inter inf();
+  hs u1(.a(inf.a),.b(inf.b),.d(inf.d),.c(inf.c));
+  generator gen;
+  driver div;
+  mailbox mbx;
+  initial
+    begin
+      gen=new();
+      div=new();
+      mbx=new();
+      div.vif=inf;
+      gen.mbx=mbx;
+      div.mbx=mbx;
+      fork
+        gen.run();
+        div.run();
+      join
+    end
+endmodule
+//output
+a=0b b=0 d=0 c=0
+a=0b b=1 d=1 c=1
+a=1b b=0 d=1 c=0
+a=1b b=1 d=0 c=0
