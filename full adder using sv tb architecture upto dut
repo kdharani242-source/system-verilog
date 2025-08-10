@@ -1,0 +1,77 @@
+//design 
+module fa(a,b,c,s,ca);
+  input a,b,c;
+  output s,ca;
+  assign s=a^b^c;
+  assign ca=(a&b)|(b&c)|(c&a);
+endmodule
+interface inter;
+  logic a;
+  logic b;
+  logic c;
+  logic s;
+  logic ca;
+endinterface
+//tb
+class generator;
+  logic a;
+  logic b;
+  logic c;
+  mailbox mbx;
+  task run();
+    for(integer i=0;i<8;i=i+1)
+      begin
+        {a,b,c}=i; mbx.put({a,b,c}); #10;
+    end
+  endtask
+endclass
+class driver;
+  virtual inter vif;
+  logic [2:0]data;
+  logic a,b,c;
+  mailbox mbx;
+  task run();
+    
+    repeat (8) begin
+      mbx.get(data);
+      a=data[2];
+      b=data[1];
+      c=data[0];
+      vif.a=a;
+      vif.b=b;
+      vif.c=c;
+      #10;
+      $display("a=%0b b=%0b c=%0b s=%0b ca=%0b",a,b,c,vif.s,vif.ca);
+    end
+  endtask
+endclass
+module tb;
+  inter inf();
+  fa u1(.a(inf.a),.b(inf.b),.c(inf.c),.s(inf.s),.ca(inf.ca));
+  generator gen;
+  driver div;
+  mailbox mbx;
+  initial
+    begin
+      gen=new();
+      div=new();
+      mbx=new();
+      div.vif=inf;
+      gen.mbx=mbx;
+      div.mbx=mbx;
+      fork
+        gen.run();
+        div.run();
+      join
+    end
+endmodule
+//output
+a=0 b=0 c=0 s=0 ca=0
+a=0 b=0 c=1 s=1 ca=0
+a=0 b=1 c=0 s=1 ca=0
+a=0 b=1 c=1 s=0 ca=1
+a=1 b=0 c=0 s=1 ca=0
+a=1 b=0 c=1 s=0 ca=1
+a=1 b=1 c=0 s=0 ca=1
+a=1 b=1 c=1 s=1 ca=1
+
