@@ -1,0 +1,70 @@
+// Code your design here
+module demux(s,d,y0,y1);
+  input s,d;
+  output y0,y1;
+  assign y0=(~s)&d;
+  assign y1=s&d;
+endmodule
+interface inter;
+  logic d;
+  logic s;
+  logic y0;
+  logic y1;
+endinterface
+// Code your testbench here
+// or browse Examples
+class generator;
+  logic s,d;
+  logic y0,y1;
+  mailbox mbx;
+  task run();
+    for(int i=0;i<4;i++) begin
+      {s,d}=i;mbx.put({s,d});#10;
+    end
+  endtask
+endclass
+class driver;
+  virtual inter vif;
+  logic [1:0]data;
+  logic d,s;
+  logic y0,y1;
+  mailbox mbx;
+  task run();
+    repeat (4) begin
+      mbx.get(data);
+      s=data[1];
+      d=data[0];
+      vif.s=s;
+      vif.d=d;
+      #10;
+      $display("s=%0b d=%0b y0=%0b y1=%0b",s,d,vif.y0,vif.y1);
+    end
+  endtask
+endclass
+module tb;
+  inter inf();
+  demux u1(.d(inf.d),.s(inf.s),.y0(inf.y0),.y1(inf.y1));
+  generator gen;
+  driver div;
+  mailbox mbx;
+  initial
+    begin
+      gen=new();
+      div=new();
+      mbx=new();
+      gen.mbx=mbx;
+      div.mbx=mbx;
+      div.vif=inf;
+      fork
+        gen.run();
+        div.run();
+      join
+    end
+endmodule
+//output
+s=0 d=0 y0=0 y1=0
+s=0 d=1 y0=1 y1=0
+s=1 d=0 y0=0 y1=0
+s=1 d=1 y0=0 y1=1
+  
+  
