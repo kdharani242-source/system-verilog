@@ -1,0 +1,151 @@
+module mux4x1(s0,s1,a,b,c,d,y);
+  input s0,s1,a,b,c,d;
+  output reg y;
+  always@(*) begin
+    case({s0,s1})
+     2'b00:y<=a;
+     2'b01:y<=b;
+     2'b10:y<=c;
+     2'b11:y<=d;
+    endcase
+  end
+endmodule
+interface inter;
+  logic s0;
+  logic s1;
+  logic a;
+  logic b;
+  logic c;
+  logic d;
+  logic y;
+endinterface
+
+  // Code your testbench here
+// or browse Examples
+class generator;
+  logic s0;
+  logic s1;
+  logic a;
+  logic b;
+  logic c;
+  logic d;
+  logic y;
+  mailbox mbx;
+  task run();
+    for(int i=0;i<64;i++) begin
+      {s0,s1,a,b,c,d}=i;mbx.put({s0,s1,a,b,c,d});#10;
+    end
+  endtask
+endclass
+class driver;
+  virtual inter vif;
+  mailbox mbx;
+  logic [5:0]data;
+  logic s0,s1,a,b,c,d;
+  logic y;
+  task run();
+    repeat (64) begin
+      mbx.get(data);
+      s0=data[5];
+      s1=data[4];
+      a=data[3];
+      b=data[2];
+      c=data[1];
+      d=data[0];
+      vif.s0=s0;
+      vif.s1=s1;
+      vif.a=a;
+      vif.b=b;
+      vif.c=c;
+      vif.d=d;
+      #10;
+      $display("s0=%0b s1=%0b a=%0b b=%0b c=%0b d=%0b y=%0b",s0,s1,a,b,c,d,vif.y);
+    end
+  endtask 
+endclass
+module tb;
+  inter inf();
+  generator gen;
+  driver div;
+  mailbox mbx;
+  mux4x1 u1(.s0(inf.s0),.s1(inf.s1),.a(inf.a),.b(inf.b),.c(inf.c),.d(inf.d),.y(inf.y));
+  initial
+    begin
+      gen=new();
+      div=new();
+      mbx=new();
+      div.vif=inf;
+      gen.mbx=mbx;
+      div.mbx=mbx;
+      fork
+        gen.run();
+        div.run();
+      join
+    end
+endmodule
+
+//output
+s0=0 s1=0 a=0 b=0 c=0 d=0 y=0
+s0=0 s1=0 a=0 b=0 c=0 d=1 y=0
+s0=0 s1=0 a=0 b=0 c=1 d=0 y=0
+s0=0 s1=0 a=0 b=0 c=1 d=1 y=0
+s0=0 s1=0 a=0 b=1 c=0 d=0 y=0
+s0=0 s1=0 a=0 b=1 c=0 d=1 y=0
+s0=0 s1=0 a=0 b=1 c=1 d=0 y=0
+s0=0 s1=0 a=0 b=1 c=1 d=1 y=0
+s0=0 s1=0 a=1 b=0 c=0 d=0 y=1
+s0=0 s1=0 a=1 b=0 c=0 d=1 y=1
+s0=0 s1=0 a=1 b=0 c=1 d=0 y=1
+s0=0 s1=0 a=1 b=0 c=1 d=1 y=1
+s0=0 s1=0 a=1 b=1 c=0 d=0 y=1
+s0=0 s1=0 a=1 b=1 c=0 d=1 y=1
+s0=0 s1=0 a=1 b=1 c=1 d=0 y=1
+s0=0 s1=0 a=1 b=1 c=1 d=1 y=1
+s0=0 s1=1 a=0 b=0 c=0 d=0 y=0
+s0=0 s1=1 a=0 b=0 c=0 d=1 y=0
+s0=0 s1=1 a=0 b=0 c=1 d=0 y=0
+s0=0 s1=1 a=0 b=0 c=1 d=1 y=0
+s0=0 s1=1 a=0 b=1 c=0 d=0 y=1
+s0=0 s1=1 a=0 b=1 c=0 d=1 y=1
+s0=0 s1=1 a=0 b=1 c=1 d=0 y=1
+s0=0 s1=1 a=0 b=1 c=1 d=1 y=1
+s0=0 s1=1 a=1 b=0 c=0 d=0 y=0
+s0=0 s1=1 a=1 b=0 c=0 d=1 y=0
+s0=0 s1=1 a=1 b=0 c=1 d=0 y=0
+s0=0 s1=1 a=1 b=0 c=1 d=1 y=0
+s0=0 s1=1 a=1 b=1 c=0 d=0 y=1
+s0=0 s1=1 a=1 b=1 c=0 d=1 y=1
+s0=0 s1=1 a=1 b=1 c=1 d=0 y=1
+s0=0 s1=1 a=1 b=1 c=1 d=1 y=1
+s0=1 s1=0 a=0 b=0 c=0 d=0 y=0
+s0=1 s1=0 a=0 b=0 c=0 d=1 y=0
+s0=1 s1=0 a=0 b=0 c=1 d=0 y=1
+s0=1 s1=0 a=0 b=0 c=1 d=1 y=1
+s0=1 s1=0 a=0 b=1 c=0 d=0 y=0
+s0=1 s1=0 a=0 b=1 c=0 d=1 y=0
+s0=1 s1=0 a=0 b=1 c=1 d=0 y=1
+s0=1 s1=0 a=0 b=1 c=1 d=1 y=1
+s0=1 s1=0 a=1 b=0 c=0 d=0 y=0
+s0=1 s1=0 a=1 b=0 c=0 d=1 y=0
+s0=1 s1=0 a=1 b=0 c=1 d=0 y=1
+s0=1 s1=0 a=1 b=0 c=1 d=1 y=1
+s0=1 s1=0 a=1 b=1 c=0 d=0 y=0
+s0=1 s1=0 a=1 b=1 c=0 d=1 y=0
+s0=1 s1=0 a=1 b=1 c=1 d=0 y=1
+s0=1 s1=0 a=1 b=1 c=1 d=1 y=1
+s0=1 s1=1 a=0 b=0 c=0 d=0 y=0
+s0=1 s1=1 a=0 b=0 c=0 d=1 y=1
+s0=1 s1=1 a=0 b=0 c=1 d=0 y=0
+s0=1 s1=1 a=0 b=0 c=1 d=1 y=1
+s0=1 s1=1 a=0 b=1 c=0 d=0 y=0
+s0=1 s1=1 a=0 b=1 c=0 d=1 y=1
+s0=1 s1=1 a=0 b=1 c=1 d=0 y=0
+s0=1 s1=1 a=0 b=1 c=1 d=1 y=1
+s0=1 s1=1 a=1 b=0 c=0 d=0 y=0
+s0=1 s1=1 a=1 b=0 c=0 d=1 y=1
+s0=1 s1=1 a=1 b=0 c=1 d=0 y=0
+s0=1 s1=1 a=1 b=0 c=1 d=1 y=1
+s0=1 s1=1 a=1 b=1 c=0 d=0 y=0
+s0=1 s1=1 a=1 b=1 c=0 d=1 y=1
+s0=1 s1=1 a=1 b=1 c=1 d=0 y=0
+s0=1 s1=1 a=1 b=1 c=1 d=1 y=1
