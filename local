@@ -1,0 +1,28 @@
+class parent;
+  local int a=10;
+  local int b=7;
+  function void print();
+    $display(" a=%0d, b=%0d",a,b);
+  endfunction
+endclass
+
+class child extends parent;
+  int c;
+  function void sub();
+    c=a-b;
+    $display(" c=%0d",c);
+  endfunction
+endclass
+ 
+module tb;
+  int d;
+  child c;
+  initial begin
+    c=new();
+    c.print();
+    c.sub();
+  end
+endmodule
+//output
+ERROR VCP5248 "Cannot access local/protected member ""a"" from this scope." "testbench.sv" 12  8
+ERROR VCP5248 "Cannot access local/protected member ""b"" from this scope." "testbench.sv" 12  10
