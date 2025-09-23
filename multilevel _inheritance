@@ -1,0 +1,70 @@
+class parent;
+  int a=10;
+  int b=20;
+  function void pprint();
+    $display("a=%0d b=%0d",a,b);
+  endfunction
+endclass
+class child extends parent;
+  int c=a+b;
+  function void cprint();
+    $display("c=%0d",c);
+  endfunction
+endclass
+class child1 extends parent;
+  int d=50;
+  function void c1print();
+    $display("d=%0d",d);
+  endfunction
+endclass
+class  child2 extends child;
+  int e=80;
+  function void c2print();
+    $display("e=%0d",e);
+  endfunction
+endclass
+module tb;
+  child c;
+  child1 c1;
+  child2 c2;
+  initial
+    begin
+      c=new();
+      c.pprint();
+      c.cprint();
+      c.a=1;
+      c.cprint();
+      c1=new();
+      c1.c1print();
+      c1.pprint();
+      c1.a=2;
+      c1.pprint();
+      c1.d=3;
+      c1.c1print();
+      c2=new();
+      c2.c2print();
+      c2.cprint();
+      c2.pprint();
+      c2.a=5;
+      c2.b=12;
+      c2.pprint();
+      c2.c=7;
+      c2.cprint();
+      c2.e=9;
+      c2.c2print();
+    end
+endmodule
+//output
+# KERNEL: a=10 b=20
+# KERNEL: c=30
+# KERNEL: c=30
+# KERNEL: d=50
+# KERNEL: a=10 b=20
+# KERNEL: a=2 b=20
+# KERNEL: d=3
+# KERNEL: e=80
+# KERNEL: c=30
+# KERNEL: a=10 b=20
+# KERNEL: a=5 b=12
+# KERNEL: c=7
+# KERNEL: e=9
