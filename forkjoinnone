@@ -1,0 +1,36 @@
+// Code your testbench here
+// or browse Examples
+module tb;
+  task one();
+    $display("task one is started=%0t",$time);
+    
+    $display("task one is completed=%0t",$time);
+  endtask
+  task two();
+    $display("task 2 is started=%0t",$time);
+    
+    $display("task 2 is completed=%0t",$time);
+  endtask
+  task three();
+    $display("task 3 is started=%0t",$time);
+    
+    $display("task 3 is completed=%0t",$time);
+  endtask
+  initial
+    begin
+      fork 
+        one();
+        two();
+        
+      join_none
+      three();
+  end
+endmodule
+
+//output
+task 3 is started=0
+task 3 is completed=0
+task one is started=0
+task one is completed=0
+task 2 is started=0
+task 2 is completed=0
