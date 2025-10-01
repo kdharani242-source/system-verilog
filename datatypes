@@ -1,0 +1,33 @@
+// Code your testbench here
+// or browse Examples
+module tb;
+  bit a;
+  byte b;
+  int i;
+  shortint s;
+  longint l;
+  integer n;
+  time t;
+  real time r;
+  initial
+    begin
+      $display("sie of bit=%0d value =%0b",$bits(a),a);
+      $display("sie of byte=%0d value =%0b",$bits(b),b);
+      $display("sie of int=%0d value =%0b",$bits(i),i);
+      $display("sie of shortint=%0d value =%0b",$bits(s),s);
+      $display("sie of longint=%0d value =%0b",$bits(l),l);
+      $display("sie of integer=%0d value =%0b",$bits(n),n);
+      $display("sie of time=%0d value =%0b",$bits(t),t);
+      $display("sie of realtime=%0d value =%0b",$bits(r),r);
+    end
+endmodule
+
+      //output
+      # KERNEL: sie of bit=1 value =0
+# KERNEL: sie of byte=8 value =0
+# KERNEL: sie of int=32 value =0
+# KERNEL: sie of shortint=16 value =0
+# KERNEL: sie of longint=64 value =0
+# KERNEL: sie of integer=32 value =xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# KERNEL: sie of time=64 value =0
+# KERNEL: sie of realtime=64 value =0.000000
