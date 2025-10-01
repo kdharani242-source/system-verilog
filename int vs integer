@@ -1,0 +1,12 @@
+module tb;
+  int a;
+  integer b;
+  initial
+    begin
+      a=4'b10xz;
+      b=4'b10xz;
+      $display("a=%0b b=%0b",a,b);
+    end
+endmodule
+//output
+# KERNEL: a=1000 b=10xz
