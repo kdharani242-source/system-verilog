@@ -1,0 +1,11 @@
+module tb;
+  time a;
+  realtime b;
+  initial
+    begin
+      #10.5;
+      $display("a=%0t b=%0f",$time,$realtime);
+    end
+endmodule
+//output
+# KERNEL: a=11 b=11.000000
