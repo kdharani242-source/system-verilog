@@ -1,0 +1,45 @@
+module tb;
+  string s1="system";
+  string s2="verilog";
+  string s4;
+  string s5;
+  int a;
+  integer num=123;
+  real b;
+  string ascii;
+  initial
+    begin
+      s4={s1,s2};
+      $display("s4=%0s",s4);
+      $display("s1=%0s",s1.toupper);
+      $display("s1=%0s",s1.tolower);
+      $display("length of s1=%0d",s1.len());
+      s1.putc(2,"d");
+      $display("s1=%0s",s1);
+      $display("s1=%0s",s1.getc(1));
+      a=s1.compare(s2);
+      $display("a=%0d",a);
+      $display("s1=%0s",s1.substr(2,4));
+      s5={s2.substr(1,5),"",s2.substr(0,4)};
+      $display("s5=%0s",s5);
+      ascii.itoa(num);
+      $display("num=%0d",num);
+      $display("ascii=%0s",ascii);
+      ascii="123";
+      b=ascii.atoreal();
+      $display("atoreal=%0d",b);
+    end
+endmodule
+//output
+# KERNEL: s4=systemverilog
+# KERNEL: s1=SYSTEM
+# KERNEL: s1=system
+# KERNEL: length of s1=6
+# KERNEL: s1=sydtem
+# KERNEL: s1=y
+# KERNEL: a=-1
+# KERNEL: s1=dte
+# KERNEL: s5=eriloveril
+# KERNEL: num=123
+# KERNEL: ascii=123
+# KERNEL: atoreal=123
