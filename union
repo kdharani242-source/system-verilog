@@ -1,0 +1,16 @@
+Union: it is defined as collection of elements of different datatypes except strings and it will give only one memory location to all the elements if one element value will change all values changed 
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+module tb;
+  union {int salary; int id;} vlsi;
+  initial
+    begin
+      vlsi.salary='d30000;
+      vlsi.id='d4444;
+      $display("salary=%0d id=%0d",vlsi.salary,vlsi.id);
+    end
+endmodule
+//output
+# KERNEL: salary=4444 id=4444
