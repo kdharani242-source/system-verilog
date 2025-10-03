@@ -1,0 +1,13 @@
+Struct: it is defined as collection of different datatypes include string and struct provide different memory location for different values
+// Code your testbench here
+// or browse Examples
+module tb;
+  struct {bit [3:0] x; byte y; int z;} vlsi;
+  initial
+    begin
+      vlsi='{10,20,30};
+      $display("x=%0d y=%0d z=%0d",vlsi.x,vlsi.y,vlsi.z);
+    end
+endmodule
+//output
+# KERNEL: x=10 y=20 z=30
