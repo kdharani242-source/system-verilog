@@ -1,0 +1,19 @@
+// Code your testbench here
+// or browse Examples
+//typedef union {int salary; int id;} v;
+module tb;
+  typedef union {int salary; int id;} v;
+  initial
+    begin
+      v vlsi,v1;
+      vlsi.salary='d30000;
+      vlsi.id='d4444;
+      v1.salary=300000;
+      v1.id='d5555;
+      $display("salary=%0d id=%0d",vlsi.salary,vlsi.id);
+      $display("salary=%0d id=%0d",v1.salary,v1.id);
+    end
+endmodule
+//output
+# KERNEL: salary=4444 id=4444
+# KERNEL: salary=5555 id=5555
