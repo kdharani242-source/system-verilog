@@ -1,0 +1,15 @@
+Packed array:packed array should be static that means size doesn’t change at runtime size should be fixed at compilation time.(scalar)
+module tb;
+  logic [2:0] x;
+  logic [15:0] y;
+  initial
+    begin
+      x='b101;
+      y=x;
+      $display("x=%0b",x);
+      $display("y=%0b",y);
+    end
+endmodule
+//output
+# KERNEL: x=101
+# KERNEL: y=101
