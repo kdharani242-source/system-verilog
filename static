@@ -1,0 +1,15 @@
+Static array:
+module tb;
+  int arr[8];
+  int arr1[]={1,2,3,4,5,6};
+  initial
+    begin
+      arr1=new[3];
+      arr1='{1,2,3};
+      $display("size of arr=%0d %0p",$size(arr),arr);
+      $display("size of arr1=%0d %0p",$size(arr1),arr1);
+    end
+endmodule
+//output
+# KERNEL: size of arr=8 0 0 0 0 0 0 0 0
+# KERNEL: size of arr1=3 1 2 3
