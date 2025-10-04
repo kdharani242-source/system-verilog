@@ -1,0 +1,13 @@
+Unpacked array:unpacked array size will be change at runtime also using new() and delete keywords(vectors)
+module tb;
+  int arr3[3:0];
+  initial
+    begin
+      arr3='{10,20,30,40};
+      $display("size=%0d",$size(arr3));
+      $display("arr3=%0p",arr3);
+    end
+endmodule
+//output
+# KERNEL: size=4
+# KERNEL: arr3=10 20 30 40
