@@ -1,0 +1,43 @@
+How to write different types of array declararations:
+module tb;
+  logic arr[4]='{default:0};
+  int ar[4]='{default:10};
+  int arr1[]={1,2,3,4,5,6,7,8};
+  bit arr2[]='{10{1}};
+  int arr3[3:0];
+  bit [7:0]arr4;
+  bit arr5[]='{4{1,0}};
+  initial
+    begin
+      arr3='{10,20,30,40};
+      $display("size=%0d",$size(arr));
+      $display("arr=%0p",arr);
+      $display("size=%0d",$size(ar));
+      $display("ar=%0p",ar);
+      $display("size=%0d",$size(arr1));
+      $display("arr1=%0p",arr1);
+      $display("size=%0d",$size(arr2));
+      $display("arr2=%0p",arr2);
+      $display("size=%0d",$size(arr3));
+      $display("arr3=%0p",arr3);
+      $display("size=%0d",$size(arr4));
+      $display("arr4=%0p",arr4);
+      $display("size=%0d",$size(arr5));
+      $display("arr5=%0p",arr5);
+    end
+endmodule
+//output
+# KERNEL: size=4
+# KERNEL: arr=0 0 0 0
+# KERNEL: size=4
+# KERNEL: ar=10 10 10 10
+# KERNEL: size=8
+# KERNEL: arr1=1 2 3 4 5 6 7 8
+# KERNEL: size=10
+# KERNEL: arr2=1 1 1 1 1 1 1 1 1 1
+# KERNEL: size=4
+# KERNEL: arr3=10 20 30 40
+# KERNEL: size=8
+# KERNEL: arr4=0
+# KERNEL: size=4
+# KERNEL: arr5=1 0 1 0
