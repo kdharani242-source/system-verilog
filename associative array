@@ -1,0 +1,44 @@
+Associative array:
+•	An associative array is a type of array where elements are not accessed using a fixed index (like 0,1,2...) but instead using a key.
+•	The key can be of any scalar data type (int, string, bit, etc.).
+•	Useful when you don’t know the size of the array beforehand, or when the indices are sparse.
+
+module tb;
+  reg [7:0] mem[int];
+  int i;
+  initial
+    begin
+      $display("arr=%0d",mem.num());
+      mem[5]=100;
+      mem[11]=110;
+      mem[23]=23;
+      mem[25]=122;
+      $display("arr=%0d",mem.num());
+      foreach(mem[i])
+        $display("mem[%0d]=%0d",i,mem[i]);
+      if (mem.first(i))
+        $display("mem[%0d]=%0d",i,mem[i]);
+      if (mem.next(i))
+        $display("mem[%0d]=%0d",i,mem[i]);
+      if (mem.last(i))
+        $display("mem[%0d]=%0d",i,mem[i]);
+      if (mem.prev(i))
+        $display("mem[%0d]=%0d",i,mem[i]);
+      if(mem.exists(2))
+        $display("number is exist");
+      else
+        $display("doesnot exist");
+    end
+endmodule
+//output
+# KERNEL: arr=0
+# KERNEL: arr=4
+# KERNEL: mem[5]=100
+# KERNEL: mem[11]=110
+# KERNEL: mem[23]=23
+# KERNEL: mem[25]=122
+# KERNEL: mem[5]=100
+# KERNEL: mem[11]=110
+# KERNEL: mem[25]=122
+# KERNEL: mem[23]=23
+# KERNEL: doesnot exist
