@@ -1,0 +1,19 @@
+Dynamic array:
+module tb;
+  int arr[];
+  initial
+    begin
+      $display("size of arr=%0d",arr.size());
+      arr=new[2];
+       $display("size of arr=%0d",arr.size());
+      arr.delete();
+       $display("size of arr=%0d",arr.size());
+      arr=new[25];
+       $display("size of arr=%0d",arr.size());
+    end
+endmodule
+//output
+# KERNEL: size of arr=0
+# KERNEL: size of arr=2
+# KERNEL: size of arr=0
+# KERNEL: size of arr=25
