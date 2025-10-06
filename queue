@@ -1,0 +1,59 @@
+Queue:
+module tb;
+  int queue[$];
+  int i;
+  initial
+    begin
+      $display("size of queue=%0d",queue.size());
+      queue='{10,20,30,40,50,60};
+      $display("size of queue=%0d",queue.size());
+      $display("elememts=%0p",queue.size());
+      foreach(queue[i])
+        $display("queue[%0d]=%0d",i,queue[i]);
+      queue.push_front(100);
+      $display("size of queue=%0d",queue.size());
+      $display("elememts=%0p",queue);
+      queue.pop_front();
+      $display("size of queue=%0d",queue.size());
+      $display("elememts=%0p",queue);
+      queue.push_back(9);
+      $display("size of queue=%0d",queue.size());
+      $display("elememts=%0p",queue);
+      queue.pop_back();
+      $display("size of queue=%0d",queue.size());
+      $display("elememts=%0p",queue);
+      queue.insert(2,1);
+      $display("size of queue=%0d",queue.size());
+      $display("elememts=%0p",queue);
+      queue.delete(1);
+      $display("size of queue=%0d",queue.size());
+      $display("elememts=%0p",queue);
+      queue.delete();
+      $display("size of queue=%0d",queue.size());
+      $display("elememts=%0p",queue);
+    end
+endmodule
+//output
+# KERNEL: size of queue=0
+# KERNEL: size of queue=6
+# KERNEL: elememts=6
+# KERNEL: queue[0]=10
+# KERNEL: queue[1]=20
+# KERNEL: queue[2]=30
+# KERNEL: queue[3]=40
+# KERNEL: queue[4]=50
+# KERNEL: queue[5]=60
+# KERNEL: size of queue=7
+# KERNEL: elememts=100 10 20 30 40 50 60
+# KERNEL: size of queue=6
+# KERNEL: elememts=10 20 30 40 50 60
+# KERNEL: size of queue=7
+# KERNEL: elememts=10 20 30 40 50 60 9
+# KERNEL: size of queue=6
+# KERNEL: elememts=10 20 30 40 50 60
+# KERNEL: size of queue=7
+# KERNEL: elememts=10 20 1 30 40 50 60
+# KERNEL: size of queue=6
+# KERNEL: elememts=10 1 30 40 50 60
+# KERNEL: size of queue=0
+# KERNEL: elememts=
