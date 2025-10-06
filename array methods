@@ -1,0 +1,29 @@
+module tb;
+  int arr[]={5,6,1,4,2,7,5,4,3,4,67,0};    // int arr[]=’{5,6,1,4,2,7,5,4,3,4,67,0};   it’s also fine
+  int arr1[];
+  initial
+    begin
+      $display("size=%0d",$size(arr));
+      $display("arr=%0p",arr);
+      $display("ar=%0p",arr.min());
+      $display("arr=%0p",arr.max());
+      arr.sort();
+      $display("arr=%0p",arr);
+      arr.rsort();
+      $display("arr=%0p",arr);
+      arr1=arr.unique();
+      $display("arr=%0p",arr1);
+      $display("arr=%0d",arr.sum());
+      $display("arr=%0d",arr.product());
+    end
+endmodule
+//output
+# KERNEL: size=12
+# KERNEL: arr=5 6 1 4 2 7 5 4 3 4 67 0
+# KERNEL: ar=0
+# KERNEL: arr=67
+# KERNEL: arr=0 1 2 3 4 4 4 5 5 6 7 67
+# KERNEL: arr=67 7 6 5 5 4 4 4 3 2 1 0
+# KERNEL: arr=0 1 2 3 4 5 6 7 67
+# KERNEL: arr=108
+# KERNEL: arr=0
