@@ -1,0 +1,48 @@
+Assignment operastors:
+// Code your testbench here
+// or browse Examples
+module tb;
+  int a=10,b=1;
+  initial
+    begin
+      $display("a=%0d",a);
+      a+=b;
+      $display("a=%0d %0d",a,b);
+      a-=b;
+      $display("a=%0d %0d",a,b);
+      a*=b;
+      $display("a=%0d %0d",a,b);
+      a/=b;
+      $display("a=%0d %0d",a,b);
+      a%=b;
+      $display("a=%0d %0d",a,b);
+      a&=b;
+      $display("a=%0b %0b",a,b);
+      a|=b;
+      $display("a=%0b %0d",a,b);
+      a^=b;
+      $display("a=%0b %0b",a,b);
+      a<<=1;
+      $display("a=%0b",a);
+      a>>=1;
+      $display("a=%0b",a);
+      a<<<=1;
+      $display("a=%0b",a);
+      a>>>=1;
+      $display("a=%0b",a);
+    end
+endmodule
+//output
+# KERNEL: a=10
+# KERNEL: a=11 1
+# KERNEL: a=10 1
+# KERNEL: a=10 1
+# KERNEL: a=10 1
+# KERNEL: a=0 1
+# KERNEL: a=0 1
+# KERNEL: a=1 1
+# KERNEL: a=0 1
+# KERNEL: a=0
+# KERNEL: a=0
+# KERNEL: a=0
+# KERNEL: a=0
