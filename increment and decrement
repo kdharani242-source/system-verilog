@@ -1,0 +1,21 @@
+Increment and Decrement:
+module tb;
+  int a=10;
+  int b=10;
+  initial
+    begin
+      a=b++;
+      $display("a=%0d b=%0d",a,b);
+      a=++b;
+      $display("a=%0d b=%0d",a,b);
+      a=b--;
+      $display("a=%0d b=%0d",a,b);
+      a=--b;
+      $display("a=%0d b=%0d",a,b);
+    end
+endmodule
+//output
+# KERNEL: a=10 b=11
+# KERNEL: a=12 b=12
+# KERNEL: a=12 b=11
+# KERNEL: a=10 b=10
