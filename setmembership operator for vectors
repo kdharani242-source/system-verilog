@@ -1,0 +1,26 @@
+For vectors:
+module tb;
+  int a=10;
+  int b=20;
+  int c=30;
+  //int ar=200;
+  int ar[3:0];
+  int i;
+  int co=0;
+  initial
+    begin
+      ar[0]=2;
+      ar[1]=20;
+      ar[2]=3;
+      ar[3]=1;
+      for (i=0; i<$size(ar);i++)
+        if (ar[i] inside {a,b,c})
+          co+=1;
+      if(co>=1)
+        $display("value is matched");
+      else
+        $display("value is not matched");
+    end
+endmodule
+//output
+Value is matched
