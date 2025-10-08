@@ -1,0 +1,20 @@
+For scalar or single value
+module tb;
+  int a=10;
+  int b=20;
+  int c=30;
+  int ar=200;
+  initial
+    begin
+      /*a[0]=2;
+      a[1]=20;
+      a[2]=3;
+      a[3]=1;*/
+      if (ar inside {a,b,c})
+        $display("value is matched");
+      else
+        $display("value is not matched");
+    end
+endmodule
+//output
+# KERNEL: value is not matched
