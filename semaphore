@@ -1,0 +1,24 @@
+module tb;
+  semaphore sema;
+  initial
+    begin
+      sema=new();
+      sema.put(1);
+      sema.get(1);
+      #5;
+      $display("%0t, process 1 starts memory read operation",$time);
+      #10;
+      $display("%0t process 1 completed memory read operation",$time);
+      sema.put(1);
+    end
+  initial
+    begin
+      sema.get(1);
+      $display("process 2 starts memory read operation",$time);
+    end
+endmodule
+//output
+# KERNEL: 5, process 1 starts memory read operation
+# KERNEL: 15 process 1 completed memory read operation
+
+
