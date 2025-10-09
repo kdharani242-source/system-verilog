@@ -1,0 +1,18 @@
+Unique if: if two are more conditions true it will shows and none of conditions true else block also abscent then also show error
+1)module tb;
+  initial
+    begin
+      int a=50;
+      int b=100;
+      unique if(a<=b)
+        $display("a=b");
+      else if(a<b)
+        $display("a<b");
+      else if(a>b)
+        $display("a>b");
+      else
+        $display("exist");
+    end
+endmodule
+# KERNEL: a=b
+# ASSERT: Error: Assertion 'unique_if_1' FAILED at time: 0, testbench.sv(6), scope: tb.0unnblk. Two or more conditions are true simultaneously: a<=b (line: 6), a<b. (line: 8)
