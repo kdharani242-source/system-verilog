@@ -1,0 +1,19 @@
+module tb;
+  mailbox mbx;
+  int a;
+  string name;
+  bit[3:0] b;
+  initial
+    begin
+      mbx=new();
+      mbx.put(50);
+      mbx.put("vlsi");
+      mbx.put(4'b1010);
+      mbx.get(a);
+      mbx.get(name);
+      mbx.get(b);
+      $display("a=%0d name=%0s b=%0b ",a,name,b);
+    end
+endmodule
+//output
+# KERNEL: a=50 name=vlsi b=1010
