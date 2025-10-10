@@ -1,0 +1,63 @@
+interface college_if;
+  logic [7:0] classroom_math;
+  logic [7:0] classroom_physics;
+  logic [7:0] classroom_lab;
+
+ 
+  modport teacher (output classroom_math, output classroom_physics, output classroom_lab);
+
+ 
+  modport student (input classroom_math, input classroom_physics, input classroom_lab);
+
+  
+  modport principal (input classroom_math, input classroom_physics, output classroom_lab);
+endinterface
+//tb
+// Code your testbench here
+// or browse Examples
+module teacher_module(college_if.teacher c_if);
+  initial begin
+    c_if.classroom_math     = 8'd85;  
+    c_if.classroom_physics  = 8'd90;  
+    c_if.classroom_lab      = 8'd95;   
+    #10;
+  end
+endmodule
+
+module principal_module(college_if.principal c_if);
+  initial begin
+    #5;
+    $display("T=%0t,Principal checks: Math=%0d, Physics=%0d lab=%0d",$time, c_if.classroom_math, c_if.classroom_physics,c_if.classroom_lab);
+    c_if.classroom_lab = 8'd99; 
+    //c_if.classroom_math = 8'd99; 
+    $display("T=%0t,Principal checks: Math=%0d, Physics=%0d lab=%0d",$time, c_if.classroom_math, c_if.classroom_physics,c_if.classroom_lab);
+  end
+endmodule
+
+module student_module(college_if.student c_if);
+  initial begin
+    #15;
+    //c_if.classroom_lab = 8'd98; 
+    $display("T=%0t,Student learns: Math=%0d, Physics=%0d, Lab=%0d",$time,
+             c_if.classroom_math, c_if.classroom_physics, c_if.classroom_lab);
+  end
+endmodule
+
+module testbench;
+  college_if c_if();
+
+  teacher_module   T1 (c_if);
+  principal_module P1 (c_if);
+  student_module   S1 (c_if);
+
+  initial begin
+    //$dumpfile("college_if_tb.vcd");
+    //$dumpvars(0, testbench);
+    #30;
+    $finish;
+  end
+endmodule
+//output
+# KERNEL: T=5,Principal checks: Math=85, Physics=90 lab=95
+# KERNEL: T=5,Principal checks: Math=85, Physics=90 lab=99
+# KERNEL: T=15,Student learns: Math=85, Physics=90, Lab=99
