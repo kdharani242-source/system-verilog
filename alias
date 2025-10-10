@@ -1,0 +1,31 @@
+// Code your testbench here
+// or browse Examples
+module tb;
+  wire a,b,c;
+  assign  a=b;
+  assign c=b;
+  assign c='b1;
+  initial
+    begin
+      #10;
+      $display("a=%0d b=%0d c=%0d",a,b,c);
+    end
+endmodule
+//output
+# KERNEL: a=z b=z c=1
+With alias
+// Code your testbench here
+// or browse Examples
+module tb;
+  wire a,b,c;
+  alias  a=b;
+  alias c=b;
+  assign c='b1;
+  initial
+    begin
+      #10;
+      $display("a=%0d b=%0d c=%0d",a,b,c);
+    end
+endmodule
+//output
+# KERNEL: a=1 b=1 c=1
