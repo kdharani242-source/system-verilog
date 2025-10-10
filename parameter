@@ -1,0 +1,29 @@
+// Code your design here
+module fa(a,b,c,s,cout);
+  parameter width=4;
+  input [width-1:0] a,b;
+  input c;
+  output [width-1:0] s;
+  output cout;
+  assign {cout,s}=a+b+c;
+endmodule
+
+// Code your testbench here
+// or browse Examples
+module tb;
+  logic [9:0]a,b,s;
+  logic c,cout;
+  fa #(.width(10)) u1(.a(a),.b(b),.c(c),.s(s),.cout(cout));
+  initial
+    begin
+      a='d4;
+      b='d5;
+      c='b1;
+      #1;
+      $display("s=%0d c=%0d",s,cout);
+    end
+endmodule
+
+
+  //output
+  # KERNEL: s=10 c=0
