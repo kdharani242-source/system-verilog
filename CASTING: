@@ -1,0 +1,18 @@
+CASTING:
+// Code your testbench here
+// or browse Examples
+module tb;
+  int x;
+  byte unsigned y;
+  initial
+    begin
+      x=-15;
+      y=x;
+      $display("y=%0d",y);
+      y=byte'(x);
+      $display("y=%0d",y);
+    end
+endmodule
+//output
+# KERNEL: y=241
+# KERNEL: y=241
