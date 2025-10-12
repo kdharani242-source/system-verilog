@@ -1,0 +1,18 @@
+      // Code your testbench here
+// or browse Examples
+module tb;
+  int x;
+  byte y;
+  initial
+    begin
+      x=-15;
+      y=x;
+      $display("y=%0d",y);
+      y=byte'(x);
+      $display("y=%0d",y);
+    end
+endmodule
+      //output
+# KERNEL: y=-15
+# KERNEL: y=-15
+NOTE:there is no use of static casting when both are signed or unsigned
