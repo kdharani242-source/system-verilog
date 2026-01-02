@@ -1,0 +1,32 @@
+Fork_join: it will applicable to only tasks and it will perform or execute all tasks in parallel that means all task functions start at a time 
+module tb;
+  task one();
+    $display("task one is started=%0t",$time);
+    #10
+    $display("task one is completed=%0t",$time);
+  endtask
+  task two();
+    $display("task 2 is started=%0t",$time);
+    #10
+    $display("task 2 is completed=%0t",$time);
+  endtask
+  task three();
+    $display("task 3 is started=%0t",$time);
+    #10
+    $display("task 3 is completed=%0t",$time);
+  endtask
+  initial      begin                                                      
+      fork 
+        one();
+        two();
+        three();
+      join
+  end
+endmodule
+//output                         
+task one is started=0
+ task 2 is started=0
+  task 3 is started=0
+ task one is completed=10
+  task 2 is completed=10
+  task 3 is completed=10
