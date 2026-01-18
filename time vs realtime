@@ -1,11 +1,12 @@
+`timescale 1ns/1ps
+
 module tb;
-  time a;
-  realtime b;
-  initial
-    begin
-      #10.5;
-      $display("a=%0t b=%0f",$time,$realtime);
-    end
+  time t;
+  realtime r;
+  initial begin
+    #10.3;
+    $display("t=%0t r=%0f", $time, $realtime);
+  end
 endmodule
 //output
-# KERNEL: a=11 b=11.000000
+# KERNEL: t=10000 r=10.300000
