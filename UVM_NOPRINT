@@ -1,0 +1,55 @@
+// Code your testbench here
+// or browse Examples
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+class vlsi extends uvm_object;
+  
+  function new(string path="vlsi");
+    super.new(path);
+  endfunction:new
+  rand bit[7:0]a;
+  rand bit[7:0]b;
+  `uvm_object_utils_begin(vlsi)
+  `uvm_field_int(a,UVM_NOPRINT|UVM_BIN);
+  `uvm_field_int(b,UVM_DEFAULT|UVM_BIN);
+  `uvm_object_utils_end
+endclass
+module tb;
+  vlsi v1,v2;
+  int r;
+  initial begin
+    v1=new("v1");
+    v2=new("v2");
+    v1.randomize();
+    v2.randomize();
+    /*v2.a=~v1.a;
+    v2.b=v1.b;
+    r=v2.compare(v1);*/
+    //`uvm_info("top_tb",$sformatf("value=%od",v.a),UVM_NONE);
+    //v.print(uvm_default_tree_printer);
+    //v.print(uvm_default_line_printer);
+    //v.print(uvm_default_table_printer);
+   /* v1.print();
+    v2.print();*/
+    /*if(r) 
+      $display("equal");
+    else
+      $display("not equal");*/
+    v1.print();
+    v2.print();
+  end
+endmodule
+
+//output
+# KERNEL: --------------------------------
+# KERNEL: Name  Type      Size  Value     
+# KERNEL: --------------------------------
+# KERNEL: v1    vlsi      -     @335      
+# KERNEL:   b   integral  8     'b10100101
+# KERNEL: --------------------------------
+# KERNEL: --------------------------------
+# KERNEL: Name  Type      Size  Value     
+# KERNEL: --------------------------------
+# KERNEL: v2    vlsi      -     @336      
+# KERNEL:   b   integral  8     'b11000000
+# KERNEL: --------------------------------
