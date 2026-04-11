@@ -1,0 +1,54 @@
+// Code your testbench here
+// or browse Examples
+module tb;
+  int queue[$];
+  int i;
+  initial
+    begin
+      $display("size of queue=%0d",queue.size());//defines the size of queue
+      queue={10,20,30,40,50};//elemnts adding 
+      $display("size of queue =%0d",queue.size());//size of queue
+      $display("elements of queue=%0p",queue);//elements present in queue
+      foreach(queue[i])
+        $display("queue[%0d]=%0d",i,queue[i]);//print every element with respect to index
+      queue.push_front(100);//add 100 to the front of the queue
+      $display("size of queue =%0d",queue.size());
+      $display("elements of queue=%0p",queue);
+      queue.pop_front();//delet addedd elent
+      $display("size of queue =%0d",queue.size());
+      $display("elements of queue=%0p",queue);
+      queue.push_back(200);//add element to the  back of the queue
+      $display("size of queue =%0d",queue.size());
+      $display("elements of queue=%0p",queue);
+      queue.pop_back();//deleting adding element
+      $display("size of queue =%0d",queue.size());
+      $display("elements of queue=%0p",queue);
+      queue.insert(3,500);//insert 500 at the position of 3
+      $display("size of queue =%0d",queue.size());
+      $display("elements of queue=%0p",queue);
+      queue.delete(4);//delete element present in 4th position
+      $display("size of queue =%0d",queue.size());
+      $display("elements of queue=%0p",queue);
+    end
+endmodule
+
+# KERNEL: size of queue=0
+# KERNEL: size of queue =5
+# KERNEL: elements of queue=10 20 30 40 50
+# KERNEL: queue[0]=10
+# KERNEL: queue[1]=20
+# KERNEL: queue[2]=30
+# KERNEL: queue[3]=40
+# KERNEL: queue[4]=50
+# KERNEL: size of queue =6
+# KERNEL: elements of queue=100 10 20 30 40 50
+# KERNEL: size of queue =5
+# KERNEL: elements of queue=10 20 30 40 50
+# KERNEL: size of queue =6
+# KERNEL: elements of queue=10 20 30 40 50 200
+# KERNEL: size of queue =5
+# KERNEL: elements of queue=10 20 30 40 50
+# KERNEL: size of queue =6
+# KERNEL: elements of queue=10 20 30 500 40 50
+# KERNEL: size of queue =5
+# KERNEL: elements of queue=10 20 30 500 50
