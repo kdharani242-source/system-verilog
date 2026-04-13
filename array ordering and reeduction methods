@@ -1,0 +1,66 @@
+// Code your testbench here
+// or browse Examples
+//array orrdering methods
+module tb;
+  int arr1[10]='{1,2,3,4,5,9,8,7,6,9};
+  int arr2[10]='{10,20,30,40,50,60,70,90,80,50};
+  int arr3[$];
+  initial
+    begin
+      $display("---------------->Array ordering methods<-------------------");
+      $display("size of arr1=%0d",$size(arr1));//size of arr1
+      $display("elements in arr1=%0p",arr1);//elements in arr1
+      $display("size of arr2=%0d",$size(arr2));//size of arr2
+      $display("elements in arr2=%0p",arr2);//elements in arr2
+      $display("min number in arr1=%0p",arr1.min());//min value in arr1
+      $display("min number in arr2=%0p",arr2.min());//min value in arr2
+      $display("max number in arr1=%0p",arr1.max());//max value in arr1
+      $display("max number in arr2=%0p",arr2.max());//max value in arr2
+      arr1.sort();//syntax to sorting
+      $display("sorted order of arr1=%0p",arr1);//sorted values of arr1
+      arr2.sort();
+      $display("sorted order of arr2=%0p",arr2);//sorted values of arr2
+      arr1.rsort();//syntax of reverse sorted
+      $display("reverse sorted order of arr1=%0p",arr1);//rsort order of arr1
+      arr2.rsort();
+      $display("reverse sorted order of arr1=%0p",arr2);//rsort order of arr2
+      arr1.reverse();//syntax to reverse an array
+      $display("reverse order of arr1=%0p",arr1);//reversee order of arr1
+      arr2.reverse();
+      $display("reverse order of arr1=%0p",arr2);//reverse ordewr of arr2
+      arr3=arr1.unique();//suntax to find unique elements
+      $display("unique values of arr1=%0p",arr3);//unique elements in arr1
+      arr3=arr2.unique();
+      $display("unique values of arr2=%0p",arr3);//uniqueue elements in arr2
+      $display("--------------->Array reduction methods<-------------------");
+      $display("sum of arr1=%0d",arr1.sum());//sum of all elements in arr1
+      $display("sum of arr2=%0d",arr2.sum());//sum of all elements in arr2
+      $display("product of arr1=%0d",arr1.product());//product of elements in arr1
+      $display("product of arr2=%0d",arr2.product());//product of elements in arr2
+    end
+endmodule
+
+//output
+
+# KERNEL: ---------------->Array ordering methods<-------------------
+# KERNEL: size of arr1=10
+# KERNEL: elements in arr1=1 2 3 4 5 9 8 7 6 9
+# KERNEL: size of arr2=10
+# KERNEL: elements in arr2=10 20 30 40 50 60 70 90 80 50
+# KERNEL: min number in arr1=1
+# KERNEL: min number in arr2=10
+# KERNEL: max number in arr1=9
+# KERNEL: max number in arr2=90
+# KERNEL: sorted order of arr1=1 2 3 4 5 6 7 8 9 9
+# KERNEL: sorted order of arr2=10 20 30 40 50 50 60 70 80 90
+# KERNEL: reverse sorted order of arr1=9 9 8 7 6 5 4 3 2 1
+# KERNEL: reverse sorted order of arr1=90 80 70 60 50 50 40 30 20 10
+# KERNEL: reverse order of arr1=1 2 3 4 5 6 7 8 9 9
+# KERNEL: reverse order of arr1=10 20 30 40 50 50 60 70 80 90
+# KERNEL: unique values of arr1=1 2 3 4 5 6 7 8 9
+# KERNEL: unique values of arr2=10 20 30 40 50 60 70 80 90
+# KERNEL: --------------->Array reduction methods<-------------------
+# KERNEL: sum of arr1=54
+# KERNEL: sum of arr2=500
+# KERNEL: product of arr1=3265920
+# KERNEL: product of arr2=852361216
