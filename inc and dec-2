@@ -1,0 +1,31 @@
+// Code your testbench here
+// or browse Examples
+module tb;
+  int a=10;
+  int c;
+  initial
+    begin
+      $display("------->post increment<--------");
+      c=a++;
+      $display("a=%0d c=%0d",a,c);
+      $display("------->post decrement<--------");
+      c=a--;
+      $display("a=%0d c=%0d",a,c);
+      $display("------->pre increment<--------");
+      c=++a;
+      $display("a=%0d c=%0d",a,c);
+      $display("------->pre decrement<--------");
+      c=--a;
+      $display("a=%0d c=%0d",a,c);
+    end
+endmodule 
+
+//output
+# KERNEL: ------->post increment<--------
+# KERNEL: a=11 c=10
+# KERNEL: ------->post decrement<--------
+# KERNEL: a=10 c=11
+# KERNEL: ------->pre increment<--------
+# KERNEL: a=11 c=11
+# KERNEL: ------->pre decrement<--------
+# KERNEL: a=10 c=10
