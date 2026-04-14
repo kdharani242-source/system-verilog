@@ -1,0 +1,51 @@
+// Code your testbench here
+// or browse Examples
+module tb;
+  int a=10;
+  int b=20;
+  initial
+    begin
+      $display("------->Assignment operrators----------->");
+      $display("a=%0d b=%0d",a,b);
+      a+=b;
+      $display("(addition) a=%0d b=%0d",a,b);
+      a-=b;
+      $display("(subtraction) a=%0d b=%0d",a,b);
+      a*=b;
+      $display("(multiplication) a=%0d b=%0d",a,b);
+      a/=b;
+      $display("(division) a=%0d b=%0d",a,b);
+      a%=b;
+      $display("(modulus) a=%0d b=%0d",a,b);
+      a|=b;
+      $display("(logical or) a=%0d b=%0d",a,b);
+      a&=b;
+      $display("(logical and) a=%0d b=%0d",a,b);
+      a^=b;
+      $display("(logical xor) a=%0d b=%0d",a,b);
+      a<<=b;
+      $display("(logical left shift) a=%0d b=%0d",a,b);
+      a>>=b;
+      $display("(logical right shift) a=%0d b=%0d",a,b);
+      a<<<=b;
+      $display("(arithmetic left shift) a=%0d b=%0d",a,b);
+      a>>>=b;
+      $display("(arithmetic right shift) a=%0d b=%0d",a,b);
+    end
+endmodule
+
+//output
+# KERNEL: ------->Assignment operrators----------->
+# KERNEL: a=10 b=20
+# KERNEL: (addition) a=30 b=20
+# KERNEL: (subtraction) a=10 b=20
+# KERNEL: (multiplication) a=200 b=20
+# KERNEL: (division) a=10 b=20
+# KERNEL: (modulus) a=10 b=20
+# KERNEL: (logical or) a=30 b=20
+# KERNEL: (logical and) a=20 b=20
+# KERNEL: (logical xor) a=0 b=20
+# KERNEL: (logical left shift) a=0 b=20
+# KERNEL: (logical right shift) a=0 b=20
+# KERNEL: (arithmetic left shift) a=0 b=20
+# KERNEL: (arithmetic right shift) a=0 b=20
